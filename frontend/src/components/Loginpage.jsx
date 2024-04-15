@@ -2,6 +2,8 @@ import React from 'react'
 import Signup from './Signup'
 import { Link } from 'react-router-dom'
 import {useForm} from 'react-hook-form'
+import axios  from 'axios'
+import toast from 'react-hot-toast'
 
 function Loginpage() {
 
@@ -11,7 +13,33 @@ function Loginpage() {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => console.log(data,1212)
+  const onSubmit = async (data) => {
+    const userInfo={
+        email:data.email,
+        password:data.password,
+    }
+
+    await axios.post("https://book-store-api-vtcd.vercel.app/user/login",userInfo)
+    .then((res)=>{
+        console.log(res.data);
+        if(res.data){
+            // alert("Loggedin successfull..");
+            toast.success("Loggedin successfull..");
+            document.getElementById('my_modal_3').close();
+            window.location.reload();
+        }
+        localStorage.setItem("Users",JSON.stringify(res.data.user));
+    }).catch((error)=>{
+        if(error.response){
+            console.log("error : "+error);
+            // alert("Error : "+error.response.data.message);
+            toast.error("Error : "+error.response.data.message);
+        }
+    })
+
+
+
+  }
 
   // console.log(watch("example")) // watch input value by passing the name of it
 

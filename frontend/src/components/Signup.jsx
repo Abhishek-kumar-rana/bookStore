@@ -1,10 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Loginpage from './Loginpage'
 import {useForm} from 'react-hook-form'
+import axios  from 'axios'
+
+
+import toast from 'react-hot-toast'
 
 
 function Signup() {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
 
     const {
         register,
@@ -12,8 +20,36 @@ function Signup() {
         formState: { errors },
       } = useForm()
     
-      const onSubmit = (data) => console.log(data,1212)
+      const onSubmit = async (data) => {
+        const userInfo={
+            fullname:data.fullname,
+            email:data.email,
+            password:data.password,
+        }
 
+        await axios.post("https://book-store-api-vtcd.vercel.app/user/signup",userInfo)
+        .then((res)=>{
+            console.log(res.data);
+            if(res.data){
+                // alert("signup successful..");
+                toast.success('SignUp Successfully!');
+                navigate(from,{replace: true});
+                
+            }
+            localStorage.setItem("Users",JSON.stringify(res.data.user));
+        }).catch((error)=>{
+            if(error.response){
+                console.log("error : "+error);
+                // alert("Error : "+error.response.data.message);
+                toast.error("Error : "+error.response.data.message);
+            }
+        })
+
+
+
+      }
+      
+      
       
     return (
         <>
@@ -37,10 +73,10 @@ function Signup() {
                                 type="text"
                                 placeholder='Enter your Name'
                                 className='w-80 px-3 py-1 border rounded-md outline-none'
-                                {...register("text", { required: true })}
+                                {...register("fullname", { required: true })}
 
                             /> <br />
-                            {errors.name && <span className=' text-red-600 dark:textz-red-500'>This field is required</span>}
+                            {errors.fullname && <span className=' text-red-600 dark:textz-red-500'>This field is required</span>}
                         </div>
 
                         {/* email */}
@@ -73,14 +109,14 @@ function Signup() {
                         {/* Button */}
 
                         <div className='flex justify-around mt-8 '>
-                            <button className="btn bg-pink-500 text-white px-3 py-1 rounded-md outline-none hover:bg-pink-600 duration-200">SignUp</button>
+                            <button className="btn bg-pink-500 text-white px-3 py-1 rounded-md outline-none hover:bg-pink-600 duration-200" type='submit'>SignUp</button>
                             <span className=' py-4'>Have account? {" "}
-                                <button className=' underline text-blue-500 cursor-pointer'
-                                    onClick={() => document.getElementById('my_modal_3').showModal()}                                 
-                                type='submit'
+                                <Link to="/" className=' underline text-blue-500 cursor-pointer'
+                                    // onClick={() => document.getElementById('my_modal_3').showModal()} 
+
                                 >Login
-                                </button>
-                                <Loginpage/>
+                                </  Link>
+                                {/* <Loginpage/> */}
 
 
                             </span>

@@ -43,15 +43,16 @@ function Contactus() {
                         <div className="w-full lg:w-1/2 px-4 ">
                             <div className="max-w-lg lg:max-w-xl lg:ml-auto">
                                 <h4 className="text-2xl font-bold text-gray-500 dark:text-white mb-8">Drop us a line</h4>
-                                <form action="">
+                                <form action="https://api.web3forms.com/submit" method="POST">
                                     <div className="flex flex-wrap -mx-4 mb-6">
+                                    <input type="hidden" name="access_key" value="4b315116-af9b-4a50-b350-0b9c1c7362d4"/>
                                         <div className="w-full lg:w-1/2 px-4 mb-6 lg:mb-0">
                                             <div>
                                                 <label className="block mb-1.5 text-sm font-semibold" htmlFor="">
                                                     <span>Full Name</span>
                                                     <span className="text-red-600">*</span>
                                                 </label>
-                                                <input className="w-full py-3 px-4 text-sm text-gray-900 dark:bg-base-content placeholder-gray-400 border border-gray-200 focus:border-purple-500 focus:outline-purple rounded-lg" type="text" placeholder="eg. Lavin Gemipit" />
+                                                <input name='name' className="w-full py-3 px-4 text-sm text-gray-900 dark:bg-base-content dark:text-white placeholder-gray-400 border border-gray-200 focus:border-purple-500 focus:outline-purple rounded-lg" type="text" placeholder="eg. Lavin Gemipit" />
                                             </div>
                                         </div>
                                         <div className="w-full lg:w-1/2 px-4">
@@ -60,7 +61,7 @@ function Contactus() {
                                                     <span>Email</span>
                                                     <span className="text-red-600">*</span>
                                                 </label>
-                                                <input className="w-full py-3 px-4 text-sm text-gray-900 dark:bg-base-content placeholder-gray-400 border border-gray-200 focus:border-purple-500 focus:outline-purple rounded-lg" type="text" placeholder="Type your email" />
+                                                <input name='email' className="w-full py-3 px-4 text-sm text-gray-900 dark:bg-base-content dark:text-white placeholder-gray-400 border border-gray-200 focus:border-purple-500 focus:outline-purple rounded-lg" type="text" placeholder="Type your email" />
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +70,7 @@ function Contactus() {
                                             <span>Message</span>
                                             <span className="text-red-600">*</span>
                                         </label>
-                                        <textarea className="w-full h-12 py-3 px-4 resize-none text-sm text-gray-900 dark:bg-base-content placeholder-gray-400 border border-gray-200 focus:border-purple-500 focus:outline-purple rounded-lg" type="text" placeholder="Type your message"></textarea>
+                                        <textarea name='message' className="w-full h-12 py-3 px-4 resize-none text-sm text-gray-900 dark:bg-base-content dark:text-white placeholder-gray-400 border border-gray-200 focus:border-purple-500 focus:outline-purple rounded-lg" type="text" placeholder="Type your message"></textarea>
                                     </div>
                                     <button className="relative group inline-block flex-shrink-0 w-full sm:w-auto py-3 px-5 text-sm font-semibold text-orange-50 bg-orange-900 rounded-md overflow-hidden" type="submit">
                                         <div className="absolute top-0 right-full w-full h-full bg-gray-900 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500"></div>
@@ -82,6 +83,10 @@ function Contactus() {
                 </div>
             </div>
         </section>
+
+        <script>
+
+        </script>
         </div>
         
         </>

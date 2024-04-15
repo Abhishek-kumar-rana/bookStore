@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Cards({ item }) {
-    console.log(item);
+    // console.log(item);
     return (
         // <div className='mt-4 my-5 p-3 hover:scale-105 transition-transform '>
         //     <div className="card w-92 bg-base-100 shadow-xl">
